@@ -5,5 +5,6 @@ package com.ponyMVC
 
 	public interface IService extends IBusinessLogicItem, IEventEmitterItem
 	{
+		
 	}
 }
