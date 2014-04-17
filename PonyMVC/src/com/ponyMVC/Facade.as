@@ -1,6 +1,5 @@
 package com.ponyMVC
 {
-	import com.ponyMVC.core.BusinessLogicItemBase;
 	import com.ponyMVC.core.BusinessLogicTierBase;
 	import com.ponyMVC.core.ControllerTier;
 	import com.ponyMVC.core.IControllerTier;
