@@ -1,8 +1,8 @@
 package com.ponyMVC
 {
-	import com.ponyMVC.core.BusinessLogicItemBase;
+	import com.ponyMVC.core.BusinessLogicEventEmitterItem;
 
-	public class Service extends BusinessLogicItemBase implements IService
+	public class Service extends BusinessLogicEventEmitterItem implements IService
 	{
 		public function Service()
 		{

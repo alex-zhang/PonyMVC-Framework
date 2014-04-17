@@ -1,7 +1,9 @@
 package com.ponyMVC
 {
 	import com.ponyMVC.core.BusinessLogicItemBase;
-
+	import com.ponyMVC.core.ponyMVCS_internal;
+	use namespace ponyMVCS_internal;
+	
 	public class CommandCluster extends BusinessLogicItemBase implements ICommand
 	{
 		protected var mSubCommandClsMap:Array = [];
@@ -40,21 +42,22 @@ package com.ponyMVC
 			return mSubCommandClsMap[commandId] as Class;
 		}
 		
-		public function onCommand(commandId:String = null, 
+		public function onExcute(commandId:String = null, 
 								  commandData:Object = null, 
 								  commandType:String = null):void
 		{
 			var subCommandCls:Class = mSubCommandClsMap[commandId] as Class;
 			if(subCommandCls != null)
 			{
-				var command:ICommand = new subCommandCls();
+				//icommand must is type of BusinessLogicItemBase.
+				var command:BusinessLogicItemBase = new subCommandCls();
 				
 				command.setName(commandId);
 				command.setFacade(facade);
-				command.setContext(context);
+				command.setContext(this);//sub command's context is this.
 				
 				//short life cycle.
-				command.onCommand(commandId, commandData, commandType);
+				ICommand(command).onExcute(commandId, commandData, commandType);
 				
 				command.setName(null);
 				command.setFacade(null);

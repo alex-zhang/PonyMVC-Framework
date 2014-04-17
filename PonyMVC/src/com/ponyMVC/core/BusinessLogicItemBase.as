@@ -16,12 +16,15 @@ package com.ponyMVC.core
 		
 		//IBusinessLogicItem Intgerface
 		public function getName():String { return mName; }
-		public function setName(value:String):void { mName = value; }
+		ponyMVCS_internal function setName(value:String):void { mName = value; }
 		
-		public function setFacade(value:IFacade):void { facade = value; }
-		public function setContext(value:Object):void { context = value; }
+		public function getFacade():IFacade { return facade; }
+		ponyMVCS_internal function setFacade(value:IFacade):void { facade = value; }
 		
-		public function onRegister():void {};
-		public function onRemove():void {};
+		public function getContext():Object { return context; }
+		ponyMVCS_internal function setContext(value:Object):void { context = value; }
+		
+		public function onRegister():void {}
+		public function onRemove():void {}
 	}
 }

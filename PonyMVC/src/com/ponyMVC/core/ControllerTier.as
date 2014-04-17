@@ -13,7 +13,7 @@ package com.ponyMVC.core
 		
 		public function registerCommand(name:String, command:ICommand):void
 		{
-			registerBusinessLogicItem(name, command);
+			registerBusinessLogicItem(name, command as BusinessLogicItemBase);
 		}
 		
 		public function findCommand(name:String):ICommand
@@ -34,6 +34,18 @@ package com.ponyMVC.core
 		public function removeAllCommand():void
 		{
 			removeAllBusinessLogicItems();
+		}
+		
+		public function sendCommand(name:String,
+									  commandId:String = null, 
+									  commandData:Object = null, 
+									  commandType:String = null):void
+		{
+			var targetCommand:ICommand = findCommand(name);
+			if(targetCommand)
+			{
+				targetCommand.onExcute(commandId, commandData, commandType);
+			}
 		}
 	}
 }

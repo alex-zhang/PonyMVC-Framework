@@ -12,7 +12,7 @@ package com.ponyMVC.core
 
 		public function registerService(name:String, service:IService):void
 		{
-			registerBusinessLogicItem(name, service);
+			registerBusinessLogicItem(name, service as BusinessLogicItemBase);
 		}
 		
 		public function findService(name:String):IService

@@ -1,5 +1,6 @@
 package com.ponyMVC
 {
+	import com.ponyMVC.core.BusinessLogicItemBase;
 	import com.ponyMVC.core.BusinessLogicTierBase;
 	import com.ponyMVC.core.ControllerTier;
 	import com.ponyMVC.core.IControllerTier;
@@ -15,6 +16,11 @@ package com.ponyMVC
 
 	public class Facade extends BusinessLogicTierBase implements IFacade
 	{
+		public static const CONTROLLER_TIER_NAME:String = "ControllerTier";
+		public static const MODEL_TIER_NAME:String = "ModelTier";
+		public static const SERVICE_TIER_NAME:String = "ServiceTier";
+		public static const VIEW_TIER_NAME:String = "ViewTier";
+		
 		protected var myControllerTier:IControllerTier;
 		protected var myModelTier:IModelTier;
 		protected var myServiceTier:IServiceTier;
@@ -23,13 +29,13 @@ package com.ponyMVC
 		public function Facade(context:Object)
 		{
 			super();
-			
+
 			this.setContext(context);
 			this.setFacade(this);
 			
 			initialize();
 		}
-
+		
 		//IFacade Interface
 		public function registerModel(name:String, model:IModel):void
 		{
@@ -130,45 +136,58 @@ package com.ponyMVC
 		{
 			myServiceTier.removeAllServices();
 		}
-		
-		public function sendControllerCommand(name:String, 
+
+		public function sendCommand(name:String, 
 											  commandId:String = null, 
 											  commandData:Object = null, 
 											  commandType:String = null):void
 		{
-			if(hasCommand(name))
+			myControllerTier.sendCommand(name, commandId, commandData, commandType);
+		}
+		
+		public function callLogicTierItemMethod(tierName:String, name:String, methodName:String, methodArgs:Array = null):*
+		{
+			var logicTier:BusinessLogicTierBase = findBusinessLogicItem(tierName) as BusinessLogicTierBase;
+			if(logicTier)
 			{
-				findCommand(name).onCommand(commandId, commandData, commandType);
+				return logicTier.callLogicItemMethod(name, methodName, methodArgs);
+			}
+			
+			return undefined;
+		}
+		
+		public function getLogicTierItemProperty(tierName:String, name:String, propertyName:String):*
+		{
+			var logicTier:BusinessLogicTierBase = findBusinessLogicItem(tierName) as BusinessLogicTierBase;
+			if(logicTier)
+			{
+				return logicTier.getLogicItemProperty(tierName, propertyName);
+			}
+			
+			return undefined;
+		}
+		
+		public function setLogicTierItemProperty(tierName:String, name:String, propertyName:String, value:*):void
+		{
+			var logicTier:BusinessLogicTierBase = findBusinessLogicItem(tierName) as BusinessLogicTierBase;
+			if(logicTier)
+			{
+				logicTier.setLogicItemProperty(tierName, propertyName, value);
 			}
 		}
 
-		public function sendMediatorCommand(name:String, 
-											commandId:String = null, 
-											commandData:Object = null, 
-											commandType:String = null):void
-		{
-			if(hasMediator(name))
-			{
-				findMediator(name).onCommand(commandId, commandData, commandType);
-			}
-		}
-		
 		//Template Method
 		protected function initialize():void
 		{
-			initializeFacade();
-			initializeController();
+			myControllerTier = IControllerTier(registerBusinessLogicItem(CONTROLLER_TIER_NAME, new ControllerTier()));
+			myModelTier = IModelTier(registerBusinessLogicItem(MODEL_TIER_NAME, new ModelTier()));
+			myServiceTier = IServiceTier(registerBusinessLogicItem(SERVICE_TIER_NAME, new ServiceTier()));
+			myViweTier = IViewTier(registerBusinessLogicItem(VIEW_TIER_NAME, new ViewTier()));
+
+			initializeController();//cmd is first rigist.
 			initializeModel();
 			initializeService();
 			initializeView();
-		}
-		
-		protected function initializeFacade():void
-		{
-			myControllerTier = IControllerTier(registerBusinessLogicItem("ControllerTier", new ControllerTier()));
-			myModelTier = IModelTier(registerBusinessLogicItem("ModelTier", new ModelTier()));
-			myServiceTier = IServiceTier(registerBusinessLogicItem("ServiceTier", new ServiceTier()));
-			myViweTier = IViewTier(registerBusinessLogicItem("IViewTier", new ViewTier()));
 		}
 		
 		protected function initializeController():void {}

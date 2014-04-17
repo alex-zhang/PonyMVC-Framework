@@ -23,10 +23,5 @@ package com.ponyMVC
 		{
 			uiTarget = value;
 		}
-		
-		//INotifyable Interface
-		public function onCommand(commandId:String = null, data:Object = null, type:String = null):void
-		{
-		}
 	}
 }

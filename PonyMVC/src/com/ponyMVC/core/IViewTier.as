@@ -5,13 +5,9 @@ package com.ponyMVC.core
 	public interface IViewTier extends IBusinessLogicItem
 	{
 		function registerMediator(mediatorName:String, mediator:IMediator):void;
-		
 		function findMediator(mediatorName:String):IMediator;
-		
 		function removeMediator(mediatorName:String):IMediator;
-		
 		function hasMediator(mediatorName:String):Boolean;
-		
 		function removeAllMediator():void;
 	}
 }

@@ -12,7 +12,7 @@ package com.ponyMVC.core
 		
 		public function registerMediator(name:String, mediator:IMediator):void
 		{
-			registerBusinessLogicItem(name, mediator);
+			registerBusinessLogicItem(name, mediator as BusinessLogicItemBase);
 		}
 
 		public function findMediator(name:String):IMediator
