@@ -30,12 +30,12 @@ package com.ponyMVC.core
 		{
 			return hasBusinessLogicItem(name);
 		}
-		
+
 		public function removeAllCommand():void
 		{
 			removeAllBusinessLogicItems();
 		}
-		
+
 		public function sendCommand(name:String,
 									  commandId:String = null, 
 									  commandData:Object = null, 

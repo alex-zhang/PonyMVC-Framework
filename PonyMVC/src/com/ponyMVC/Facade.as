@@ -20,10 +20,10 @@ package com.ponyMVC
 		public static const SERVICE_TIER_NAME:String = "ServiceTier";
 		public static const VIEW_TIER_NAME:String = "ViewTier";
 		
-		protected var myControllerTier:IControllerTier;
-		protected var myModelTier:IModelTier;
-		protected var myServiceTier:IServiceTier;
-		protected var myViweTier:IViewTier;
+		protected var controllerTier:IControllerTier;
+		protected var modelTier:IModelTier;
+		protected var serviceTier:IServiceTier;
+		protected var viweTier:IViewTier;
 
 		public function Facade(context:Object)
 		{
@@ -38,150 +38,165 @@ package com.ponyMVC
 		//IFacade Interface
 		public function registerModel(name:String, model:IModel):void
 		{
-			myModelTier.registerModel(name, model);
+			modelTier.registerModel(name, model);
 		}
 		
 		public function findModel(name:String):IModel
 		{
-			return myModelTier.findModel(name);
+			return modelTier.findModel(name);
 		}
 
 		public function removeModel(name:String):IModel
 		{
-			return myModelTier.removeModel(name);
+			return modelTier.removeModel(name);
 		}
 		
 		public function hasModel(name:String):Boolean
 		{
-			return myModelTier.hasModel(name);
+			return modelTier.hasModel(name);
 		}
 		
 		public function removeAllModels():void
 		{
-			myModelTier.removeAllModels();
+			modelTier.removeAllModels();
 		}
 		
 		public function registerMediator(name:String, mediator:IMediator):void
 		{
-			myViweTier.registerMediator(name, mediator);
+			viweTier.registerMediator(name, mediator);
 		}
 		
 		public function findMediator(name:String):IMediator
 		{
-			return myViweTier.findMediator(name);
+			return viweTier.findMediator(name);
 		}
 		
 		public function removeMediator(name:String):IMediator
 		{
-			return myViweTier.removeMediator(name);
+			return viweTier.removeMediator(name);
 		}
 		
 		public function hasMediator(name:String):Boolean
 		{
-			return myViweTier.hasMediator(name);
+			return viweTier.hasMediator(name);
 		}
 		
 		public function removeAllMediator():void
 		{
-			myViweTier.removeAllMediator();
+			viweTier.removeAllMediator();
 		}
 		
 		public function registerCommand(name:String, command:ICommand):void
 		{
-			myControllerTier.registerCommand(name, command);
+			controllerTier.registerCommand(name, command);
 		}
 		
 		public function findCommand(name:String):ICommand
 		{
-			return myControllerTier.findCommand(name);
+			return controllerTier.findCommand(name);
 		}
 		
 		public function removeCommand(name:String):ICommand
 		{
-			return myControllerTier.removeCommand(name);
+			return controllerTier.removeCommand(name);
 		}
 		
 		public function hasCommand(name:String):Boolean
 		{
-			return myControllerTier.hasCommand(name);
+			return controllerTier.hasCommand(name);
 		}
 
 		public function removeAllCommand():void
 		{
-			myControllerTier.removeAllCommand();
+			controllerTier.removeAllCommand();
 		}
 		
 		public function registerService(name:String, service:IService):void
 		{
-			myServiceTier.registerService(name, service);
+			serviceTier.registerService(name, service);
 		}
 		
 		public function findService(name:String):IService
 		{
-			return myServiceTier.findService(name);
+			return serviceTier.findService(name);
 		}
 		
 		public function removeService(name:String):IService
 		{
-			return myServiceTier.removeService(name);
+			return serviceTier.removeService(name);
 		}
 		
 		public function hasService(name:String):Boolean
 		{
-			return myServiceTier.hasService(name);
+			return serviceTier.hasService(name);
 		}
 		
 		public function removeAllServices():void
 		{
-			myServiceTier.removeAllServices();
+			serviceTier.removeAllServices();
 		}
 
+		//tier's communication mechanism.
 		public function sendCommand(name:String, 
 											  commandId:String = null, 
 											  commandData:Object = null, 
 											  commandType:String = null):void
 		{
-			myControllerTier.sendCommand(name, commandId, commandData, commandType);
+			controllerTier.sendCommand(name, commandId, commandData, commandType);
 		}
 		
-		public function callLogicTierItemMethod(tierName:String, name:String, methodName:String, methodArgs:Array = null):*
+		public function getMeditorProperty(name:String, propertyName:String):*
 		{
-			var logicTier:BusinessLogicTierBase = findBusinessLogicItem(tierName) as BusinessLogicTierBase;
-			if(logicTier)
-			{
-				return logicTier.callLogicItemMethod(name, methodName, methodArgs);
-			}
-			
-			return undefined;
+			return BusinessLogicTierBase(viweTier).getLogicItemProperty(name, propertyName);
 		}
 		
-		public function getLogicTierItemProperty(tierName:String, name:String, propertyName:String):*
+		public function setMeditorProperty(name:String, propertyName:String, protertyValue:*):void
 		{
-			var logicTier:BusinessLogicTierBase = findBusinessLogicItem(tierName) as BusinessLogicTierBase;
-			if(logicTier)
-			{
-				return logicTier.getLogicItemProperty(tierName, propertyName);
-			}
-			
-			return undefined;
+			return BusinessLogicTierBase(viweTier).setLogicItemProperty(name, propertyName, protertyValue);
 		}
 		
-		public function setLogicTierItemProperty(tierName:String, name:String, propertyName:String, value:*):void
+		public function callMeditorMethod(name:String, methodName:String, methodArgs:Array = null):*
 		{
-			var logicTier:BusinessLogicTierBase = findBusinessLogicItem(tierName) as BusinessLogicTierBase;
-			if(logicTier)
-			{
-				logicTier.setLogicItemProperty(tierName, propertyName, value);
-			}
+			return BusinessLogicTierBase(viweTier).callLogicItemMethod(name, methodName, methodArgs);
+		}
+		
+		public function getModelProperty(name:String, propertyName:String):*
+		{
+			return BusinessLogicTierBase(modelTier).getLogicItemProperty(name, propertyName);
+		}
+		
+		public function setModelProperty(name:String, propertyName:String, protertyValue:*):void
+		{
+			return BusinessLogicTierBase(modelTier).setLogicItemProperty(name, propertyName, protertyValue);
+		}
+		
+		public function callModelMethod(name:String, methodName:String, methodArgs:Array = null):*
+		{
+			return BusinessLogicTierBase(modelTier).callLogicItemMethod(name, methodName, methodArgs);
+		}
+		
+		public function getServiceProperty(name:String, propertyName:String):*
+		{
+			return BusinessLogicTierBase(serviceTier).getLogicItemProperty(name, propertyName);
+		}
+		
+		public function setServiceProperty(name:String, propertyName:String, protertyValue:*):void
+		{
+			return BusinessLogicTierBase(serviceTier).setLogicItemProperty(name, propertyName, protertyValue);
+		}
+		
+		public function callServiceMethod(name:String, methodName:String, methodArgs:Array = null):*
+		{
+			return BusinessLogicTierBase(serviceTier).callLogicItemMethod(name, methodName, methodArgs);
 		}
 
 		//Template Method
 		protected function initialize():void
 		{
-			myControllerTier = IControllerTier(registerBusinessLogicItem(CONTROLLER_TIER_NAME, new ControllerTier()));
-			myModelTier = IModelTier(registerBusinessLogicItem(MODEL_TIER_NAME, new ModelTier()));
-			myServiceTier = IServiceTier(registerBusinessLogicItem(SERVICE_TIER_NAME, new ServiceTier()));
-			myViweTier = IViewTier(registerBusinessLogicItem(VIEW_TIER_NAME, new ViewTier()));
+			controllerTier = IControllerTier(registerBusinessLogicItem(CONTROLLER_TIER_NAME, new ControllerTier()));
+			modelTier = IModelTier(registerBusinessLogicItem(MODEL_TIER_NAME, new ModelTier()));
+			serviceTier = IServiceTier(registerBusinessLogicItem(SERVICE_TIER_NAME, new ServiceTier()));
+			viweTier = IViewTier(registerBusinessLogicItem(VIEW_TIER_NAME, new ViewTier()));
 
 			initializeController();//cmd is first rigist.
 			initializeModel();

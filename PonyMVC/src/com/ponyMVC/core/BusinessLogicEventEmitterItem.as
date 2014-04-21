@@ -5,12 +5,13 @@ package com.ponyMVC.core
 	public class BusinessLogicEventEmitterItem extends BusinessLogicItemBase implements IEventEmitterItem
 	{
 		private var mEventListeners:Dictionary;
-		
+
 		public function BusinessLogicEventEmitterItem()
 		{
 			super();
 		}
-		
+
+		//callbakc is method(eventData)
 		public function addEventListener(eventType:String, listener:Function):void
 		{
 			if(mEventListeners == null) mEventListeners = new Dictionary();
@@ -55,7 +56,7 @@ package com.ponyMVC.core
 			}
 		}
 		
-		public function dispatchEvent(eventType:String):void
+		public function dispatchEvent(eventType:String, eventData:Object = null):void
 		{
 			if(mEventListeners == null) return;
 			
@@ -65,7 +66,7 @@ package com.ponyMVC.core
 			var listenerLength:uint = listeners.length;
 			for(var i:int = 0; i < listenerLength; i++)
 			{
-				listeners[i](this);
+				listeners[i](eventData);
 			}
 		}
 		

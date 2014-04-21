@@ -1,30 +1,26 @@
 package com.ponyMVC
 {
 	import com.ponyMVC.core.BusinessLogicEventEmitterItem;
-	
-	import flash.utils.Dictionary;
 
 	public class Model extends BusinessLogicEventEmitterItem implements IModel
 	{
-		private var mEventListeners:Dictionary;
+		protected var data:Object;
 		
-		protected var mData:Object;
-		
-		public function Model(mData:Object = null)
+		public function Model(data:Object = null)
 		{
 			super();
 			
-			this.mData = mData;
+			this.data = data;
 		}
 		
 		public function setData(value:Object):void
 		{
-			mData = value;
+			data = value;
 		}
 		
 		public function getData():Object
 		{
-			return mData;
+			return data;
 		}
 	}
 }
