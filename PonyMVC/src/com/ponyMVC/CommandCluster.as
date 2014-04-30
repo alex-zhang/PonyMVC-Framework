@@ -17,7 +17,7 @@ package com.ponyMVC
 		{
 			if(!hasSubCommand(commandId))
 			{
-				mSubCommandClsMap[commandId];
+				mSubCommandClsMap[commandId] = commandCls;
 			}
 		}
 		
@@ -54,7 +54,7 @@ package com.ponyMVC
 				
 				command.setName(commandId);
 				command.setFacade(facade);
-				command.setContext(this);//sub command's context is this.
+				command.setContext(context);//sub command's context is this.
 				
 				//short life cycle.
 				ICommand(command).onExcute(commandId, commandData, commandType);

@@ -66,7 +66,7 @@ package com.ponyMVC.core
 			var listenerLength:uint = listeners.length;
 			for(var i:int = 0; i < listenerLength; i++)
 			{
-				listeners[i](eventData);
+				listeners[i].call(null, eventData);
 			}
 		}
 		
