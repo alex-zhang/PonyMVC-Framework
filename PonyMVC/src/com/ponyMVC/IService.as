@@ -1,9 +1,9 @@
 package com.ponyMVC
 {
+	import com.fireflyLib.utils.IEventEmitter;
 	import com.ponyMVC.core.IBusinessLogicItem;
-	import com.ponyMVC.core.IEventEmitterItem;
 
-	public interface IService extends IBusinessLogicItem, IEventEmitterItem
+	public interface IService extends IBusinessLogicItem, IEventEmitter
 	{
 	}
 }
