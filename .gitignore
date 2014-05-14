@@ -1,13 +1,23 @@
-# Build and Release Folders
+.DS_Store
+Thumbs.db
+*.swc
+*.stackdump
+._*
+*.local.properties
+*.p12
+out/
+output/
+third-party/
+signing/
+.actionScriptProperties
+.flexLibProperties
+.project
+.settings/
 bin-debug/
 bin-release/
-starling/doc/html/
-
-# Project property files
-.settings/
-.flexProperties
-.FlexUnitSettings
+html-template/
+.metadata/
+*.iml
 .idea/
-
-# OS X folders
-.DS_Store
+archive/
+*.lnk
