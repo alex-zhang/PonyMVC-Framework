@@ -32,6 +32,11 @@ package com.ponyMVC
 			return commandCls;
 		}
 		
+		public function clearAllSubCommands():void
+		{
+			mSubCommandClsMap = [];
+		}
+		
 		public function hasSubCommand(commandId:String):Boolean
 		{
 			return mSubCommandClsMap[commandId] != undefined;

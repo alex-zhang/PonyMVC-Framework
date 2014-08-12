@@ -20,3 +20,5 @@ html-template/
 .idea/
 archive/
 *.lnk
+/PonyMVC/libs
+/PonyMVC/bin
