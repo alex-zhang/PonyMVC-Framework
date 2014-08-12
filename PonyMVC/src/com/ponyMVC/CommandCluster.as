@@ -47,7 +47,7 @@ package com.ponyMVC
 			return mSubCommandClsMap[commandId] as Class;
 		}
 		
-		public function onExcute(commandId:String = null, 
+		override public function onExcute(commandId:String = null, 
 								  commandData:Object = null, 
 								  commandType:String = null):void
 		{

@@ -24,7 +24,13 @@ package com.ponyMVC.core
 		public function getContext():Object { return context; }
 		ponyMVCS_internal function setContext(value:Object):void { context = value; }
 		
-		public function onRegister():void {}
-		public function onRemove():void {}
+		public function onRegister():void {};
+		public function onRemove():void {};
+		
+		public function onExcute(commandId:String = null, 
+						  commandData:Object = null, 
+						  commandType:String = null):void
+		{
+		}
 	}
 }

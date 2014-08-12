@@ -8,11 +8,5 @@ package com.ponyMVC
 		{
 			super();
 		}
-
-		public function onExcute(commandId:String = null, 
-								  commandData:Object = null, 
-								  commandType:String = null):void
-		{
-		}
 	}
 }

@@ -103,5 +103,17 @@ package com.ponyMVC.core
 				findedItem[propertyName] = value;
 			}
 		}
+
+		ponyMVCS_internal function excuteLogicItemCommand(name:String,
+									commandId:String = null, 
+									commandData:Object = null, 
+									commandType:String = null):void
+		{
+			var findedItem:BusinessLogicItemBase = findBusinessLogicItem(name);
+			if(findedItem)
+			{
+				findedItem.onExcute(commandId, commandData, commandType);
+			}
+		}
 	}
 }

@@ -35,17 +35,13 @@ package com.ponyMVC.core
 		{
 			removeAllBusinessLogicItems();
 		}
-
+		
 		public function sendCommand(name:String,
-									  commandId:String = null, 
-									  commandData:Object = null, 
-									  commandType:String = null):void
+									commandId:String = null, 
+									commandData:Object = null, 
+									commandType:String = null):void
 		{
-			var targetCommand:ICommand = findCommand(name);
-			if(targetCommand)
-			{
-				targetCommand.onExcute(commandId, commandData, commandType);
-			}
+			excuteLogicItemCommand(name, commandId, commandData, commandType);
 		}
 	}
 }

@@ -145,6 +145,14 @@ package com.ponyMVC
 			controllerTier.sendCommand(name, commandId, commandData, commandType);
 		}
 		
+		public function sendNotification(name:String, 
+									commandId:String = null, 
+									commandData:Object = null, 
+									commandType:String = null):void
+		{
+			viweTier.sendNotification(name, commandId, commandData, commandType);
+		}
+		
 		public function getMeditorProperty(name:String, propertyName:String):*
 		{
 			return BusinessLogicTierBase(viweTier).getLogicItemProperty(name, propertyName);

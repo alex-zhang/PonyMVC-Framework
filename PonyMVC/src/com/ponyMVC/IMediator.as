@@ -6,5 +6,9 @@ package com.ponyMVC
 	{
 		function getUITarget():Object;
 		function setUITarget(value:Object):void;
+		
+		function onExcute(commandId:String = null, 
+								 commandData:Object = null, 
+								 commandType:String = null):void;
 	}
 }

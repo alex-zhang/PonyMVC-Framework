@@ -9,7 +9,7 @@ package com.ponyMVC.core
 		function removeCommand(name:String):ICommand;
 		function hasCommand(name:String):Boolean;
 		function removeAllCommand():void;
-
+		
 		function sendCommand(name:String,
 							 commandId:String = null, 
 							 commandData:Object = null, 

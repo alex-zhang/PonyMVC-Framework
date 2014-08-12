@@ -9,5 +9,10 @@ package com.ponyMVC.core
 		function removeMediator(mediatorName:String):IMediator;
 		function hasMediator(mediatorName:String):Boolean;
 		function removeAllMediator():void;
+		
+		function sendNotification(name:String,
+									commandId:String = null, 
+									commandData:Object = null, 
+									commandType:String = null):void;
 	}
 }

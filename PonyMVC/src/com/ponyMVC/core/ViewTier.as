@@ -34,5 +34,13 @@ package com.ponyMVC.core
 		{
 			removeAllBusinessLogicItems();
 		}
+		
+		public function sendNotification(name:String,
+						commandId:String = null, 
+						commandData:Object = null, 
+						commandType:String = null):void
+		{
+			excuteLogicItemCommand(name, commandId, commandData, commandType);
+		}
 	}
 }
