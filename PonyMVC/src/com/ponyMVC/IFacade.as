@@ -29,6 +29,11 @@ package com.ponyMVC
 									commandId:String = null, 
 									commandData:Object = null, 
 									commandType:String = null):void;
+
+        function sendNotification(name:String,
+                                  commandId:String = null,
+                                  commandData:Object = null,
+                                  commandType:String = null):void;
 		
 		function getMeditorProperty(name:String, propertyName:String):*;
 		function setMeditorProperty(name:String, propertyName:String, protertyValue:*):void;
